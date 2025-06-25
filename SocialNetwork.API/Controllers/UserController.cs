@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Application.DTOs;
 using SocialNetwork.Application.Interfaces;
 using SocialNetwork.Application.Payloads;
+using SocialNetwork.Shared.Models;
 using System.Security.Claims;
 
 namespace SocialNetwork.API.Controllers
