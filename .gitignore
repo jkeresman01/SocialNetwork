@@ -1,0 +1,64 @@
+# === .NET & Visual Studio ===
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]ogs/
+*.log
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+
+# Rider
+.idea/
+
+# dotCover
+*.dotCover
+
+# Temporary files
+*.tmp
+*.bak
+*.old
+*.orig
+*.cache
+*.dbmdl
+
+# Auto-generated
+Generated_Code/
+
+# Entity Framework Migrations snapshot files (optional)
+**/*Snapshot.cs
+
+# === ASP.NET Core ===
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+secrets.json
+
+# === Node / Frontend ===
+**/node_modules/
+**/dist/
+**/build/
+**/.env
+**/.env.*.local
+**/.next/
+**/.turbo/
+**/.vite/
+**/coverage/
+**/.cache/
+
+# === Misc ===
+*.DS_Store
+Thumbs.db
