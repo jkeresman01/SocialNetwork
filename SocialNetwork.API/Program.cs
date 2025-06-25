@@ -1,8 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Application.Interfaces;
+using SocialNetwork.Application.Mappers;
+using SocialNetwork.Application.Services;
+using SocialNetwork.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddAutoMapper(typeof(UserProfile).Assembly);
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
