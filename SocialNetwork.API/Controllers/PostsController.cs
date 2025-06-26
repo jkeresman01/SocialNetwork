@@ -63,6 +63,24 @@ namespace SocialNetwork.API.Controllers
         {
             return Ok(await _postService.GetCommentsFromPostAsync(postId));
         }
+
+        [HttpPut("{id:long}")]
+        [Authorize]
+        public async Task<ActionResult<PostDTO>> UpdatePostById(long id, [FromBody] UpdatePostRequest request)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email)!;
+            var updatedPost = await _postService.UpdatePostByIdAsync(id, email, request);
+            return Ok(updatedPost);
+        }
+
+        [HttpDelete("{id:long}")]
+        [Authorize]
+        public async Task<IActionResult> DeletePostById(long id)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email)!;
+            await _postService.DeletePostByIdAsync(id, email);
+            return NoContent();
+        }
     }
 }
 

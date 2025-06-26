@@ -130,5 +130,42 @@ public class PostService(AppDbContext context, IMapper mapper) : IPostService
 
         return _mapper.Map<List<CommentDTO>>(comments);
     }
+
+    public async Task<PostDTO> UpdatePostByIdAsync(long postId, string userEmail, UpdatePostRequest request)
+    {
+        var post = await _context.Posts
+            .Include(p => p.User)
+            .FirstOrDefaultAsync(p => p.Id == postId)
+            ?? throw new ResourceNotFoundException($"Post with ID {postId} not found.");
+
+        if (!string.Equals(post.User.Email, userEmail, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new ForbiddenAccessException("You are not authorized to update this post.");
+        }
+
+        post.Title = request.Title;
+        post.Content = request.Content;
+        post.UpdatedAt = DateTime.UtcNow;
+
+        _context.Posts.Update(post);
+        await _context.SaveChangesAsync();
+
+        return _mapper.Map<PostDTO>(post);
+    }
+
+    public async Task DeletePostByIdAsync(long postId, string userEmail)
+    {
+        var post = await _context.Posts
+            .Include(p => p.User)
+            .FirstOrDefaultAsync(p => p.Id == postId)
+            ?? throw new ResourceNotFoundException($"Post with ID {postId} not found.");
+
+        if (!string.Equals(post.User.Email, userEmail, StringComparison.OrdinalIgnoreCase))
+            throw new ForbiddenAccessException("You are not authorized to delete this post.");
+
+        _context.Posts.Remove(post);
+        await _context.SaveChangesAsync();
+    }
+
 }
 
