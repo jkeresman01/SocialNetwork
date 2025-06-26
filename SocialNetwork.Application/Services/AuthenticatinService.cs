@@ -4,7 +4,6 @@ using SocialNetwork.Application.Interfaces;
 using SocialNetwork.Application.Payloads;
 using SocialNetwork.Domain.Exceptions;
 using SocialNetwork.Domain.Models;
-using SocialNetwork.Domain.Models;
 using SocialNetwork.Infrastructure.Data;
 using SocialNetwork.Infrastructure.Security;
 using AutoMapper;
@@ -30,7 +29,6 @@ public class AuthenticationService(AppDbContext context, IMapper mapper, IConfig
         }
 
         var secret = _config["Jwt:Key"];
-        Console.WriteLine(secret);
 
         string token = JwtTokenProvider.CreateToken(
             _config["Jwt:Key"],
