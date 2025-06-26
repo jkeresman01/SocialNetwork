@@ -13,5 +13,7 @@ public interface IPostService
     Task RatePostAsync(long postId, string userEmail, int stars);
     Task CommentOnPostAsync(long postId, string userEmail, string content);
     Task<List<CommentDTO>> GetCommentsFromPostAsync(long postId);
+    Task<PostDTO> UpdatePostByIdAsync(long postId, string userEmail, UpdatePostRequest request);
+    Task DeletePostByIdAsync(long postId, string userEmail);
 }
 
