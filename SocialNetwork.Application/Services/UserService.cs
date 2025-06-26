@@ -26,12 +26,12 @@ namespace SocialNetwork.Application.Services
                 .ToListAsync();
 
             return new PagedResult<UserSummaryDTO>
-            {
-                Items = _mapper.Map<List<UserSummaryDTO>>(users),
-                Page = page,
-                Size = size,
-                TotalCount = totalCount
-            };
+            (
+                _mapper.Map<List<UserSummaryDTO>>(users),
+                 page,
+                 size,
+                 totalCount
+            );
         }
 
         public async Task<UserDTO> GetUserByIdAsync(long id)

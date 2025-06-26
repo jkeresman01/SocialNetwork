@@ -13,6 +13,8 @@ public partial class User
 
     public string FirstName { get; set; } = null!;
 
+    public string Salt { get; set; } = null!;
+
     public string Gender { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
@@ -23,17 +25,17 @@ public partial class User
 
     public DateTime UpdatedAt { get; set; }
 
-    public virtual ICollection<Comment> Comment { get; set; } = [];
+    public virtual ICollection<Comment> Comments { get; set; } = [];
 
-    public virtual ICollection<FriendRequest> FriendRequestReceiver { get; set; } = [];
+    public virtual ICollection<FriendRequest> FriendRequestReceivers { get; set; } = [];
 
-    public virtual ICollection<FriendRequest> FriendRequestSender { get; set; } = [];
+    public virtual ICollection<FriendRequest> FriendRequestSenders { get; set; } = [];
 
-    public virtual ICollection<Post> Post { get; set; } = [];
+    public virtual ICollection<Post> Posts { get; set; } = [];
 
-    public virtual ICollection<Rating> Rating { get; set; } = [];
+    public virtual ICollection<Rating> Ratings { get; set; } = [];
 
-    public virtual ICollection<User> Friend { get; set; } = [];
+    public virtual ICollection<User> Friends { get; set; } = [];
 
-    public virtual ICollection<User> UserNavigation { get; set; } = [];
+    public virtual ICollection<User> UserNavigations { get; set; } = [];
 }

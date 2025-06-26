@@ -3,13 +3,14 @@ using System.Text.RegularExpressions;
 
 namespace SocialNetwork.Domain.Validation
 {
-    public class AlgebraEmailAttribute : ValidationAttribute
+    public partial class AlgebraEmailAttribute : ValidationAttribute
     {
-        private static readonly Regex EmailRegex = new(@"^[a-zA-Z0-9._%+-]+@algebra\.hr$", RegexOptions.IgnoreCase);
+        [GeneratedRegex(@"^[a-zA-Z0-9._%+-]+@algebra\.hr$", RegexOptions.IgnoreCase, "en-US")]
+        private static partial Regex EmailRegex();
 
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            if (value is string email && EmailRegex.IsMatch(email))
+            if (value is string email && EmailRegex().IsMatch(email))
             {
                 return ValidationResult.Success;
             }

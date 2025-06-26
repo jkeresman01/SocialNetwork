@@ -41,7 +41,7 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FKs1slvnkuemjsq2kj4h3vhx7i1");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Comment)
+            entity.HasOne(d => d.User).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FKoo5phijy22unidgkw0sipcs74");
@@ -69,12 +69,12 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
                 .HasPrecision(6)
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.Receiver).WithMany(p => p.FriendRequestReceiver)
+            entity.HasOne(d => d.Receiver).WithMany(p => p.FriendRequestReceivers)
                 .HasForeignKey(d => d.ReceiverId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK28iulg0paqbykkbq2dtgnn0a0");
 
-            entity.HasOne(d => d.Sender).WithMany(p => p.FriendRequestSender)
+            entity.HasOne(d => d.Sender).WithMany(p => p.FriendRequestSenders)
                 .HasForeignKey(d => d.SenderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK5w70rgoa5dp1nn2g21b3u0umm");
@@ -102,7 +102,7 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
                 .HasColumnName("updated_at");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Post)
+            entity.HasOne(d => d.User).WithMany(p => p.Posts)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FKrh90w2rgxa8jj5r0kjlaims1y");
@@ -132,7 +132,7 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FKq23oorcfn21b1owhgcqle69oq");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Rating)
+            entity.HasOne(d => d.User).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK740eouanmwdsi22ljt2tnwri8");
@@ -178,7 +178,7 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
                 .HasPrecision(6)
                 .HasColumnName("updated_at");
 
-            entity.HasMany(d => d.Friend).WithMany(p => p.UserNavigation)
+            entity.HasMany(d => d.Friends).WithMany(p => p.UserNavigations)
                 .UsingEntity<Dictionary<string, object>>(
                     "UserFriends",
                     r => r.HasOne<User>().WithMany()
@@ -197,7 +197,7 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options) : DbCo
                         j.IndexerProperty<long>("FriendId").HasColumnName("friend_id");
                     });
 
-            entity.HasMany(d => d.UserNavigation).WithMany(p => p.Friend)
+            entity.HasMany(d => d.UserNavigations).WithMany(p => p.Friends)
                 .UsingEntity<Dictionary<string, object>>(
                     "UserFriends",
                     r => r.HasOne<User>().WithMany()

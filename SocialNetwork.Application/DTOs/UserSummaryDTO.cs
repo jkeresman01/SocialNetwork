@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.DTOs
 {
-    public record UserSummaryDTO(
-       long Id,
-       string FirstName,
-       string LastName
-   );
+    public class UserSummaryDTO
+    {
+        public long Id { get; set; }
+        public string Email { get; set; } = default!;
+        public string FullName { get; set; } = default!;
+    }
+
 }

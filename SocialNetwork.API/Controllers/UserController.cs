@@ -28,9 +28,9 @@ namespace SocialNetwork.API.Controllers
             return Ok(user);
         }
 
-        [HttpPut("{userId}")]
+        [HttpPut]
         [Authorize]
-        public async Task<ActionResult<UserDTO>> UpdateUserById([FromRoute] long userId, [FromBody] UserUpdateRequest updateRequest)
+        public async Task<ActionResult<UserDTO>> UpdateUserById([FromBody] UserUpdateRequest updateRequest)
         {
             var email = User.FindFirstValue(ClaimTypes.Name);
             var updatedUser = await _userService.UpdateUserByEmailAsync(email, updateRequest);
