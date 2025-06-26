@@ -15,6 +15,7 @@ namespace SocialNetwork.Application.Mappers
         public UserProfile()
         {
             CreateMap<User, UserDTO>();
+            CreateMap<User, UserSummaryDTO>();
 
             CreateMap<User, UserSummaryDTO>()
                 .ForCtorParam("Id", opt => opt.MapFrom(src => src.Id))

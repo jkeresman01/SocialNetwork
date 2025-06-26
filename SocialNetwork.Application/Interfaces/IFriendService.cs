@@ -9,5 +9,7 @@ public interface IFriendService
     Task DeclineRequestAsync(string receiverEmail, long requestId);
     Task RemoveFriendAsync(string requesterEmail, long otherUserId);
     Task<List<FriendRequestDTO>> GetPendingRequestsAsync(string receiverEmail);
+    Task<List<UserSummaryDTO>> GetFriendsAsync(string userEmail);
+    Task<List<UserSummaryDTO>> GetNonFriendsAsync(string userEmail);
 }
 

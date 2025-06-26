@@ -52,5 +52,20 @@ public class FriendsController(IFriendService friendService) : ControllerBase
         var requests = await _friendService.GetPendingRequestsAsync(email);
         return Ok(requests);
     }
+
+    [HttpGet("list")]
+    public async Task<ActionResult<List<UserSummaryDTO>>> GetFriends()
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email)!;
+        return Ok(await _friendService.GetFriendsAsync(email));
+    }
+
+    [HttpGet("non-friends")]
+    public async Task<ActionResult<List<UserSummaryDTO>>> GetNonFriends()
+    {
+        var email = User.FindFirstValue(ClaimTypes.Email)!;
+        return Ok(await _friendService.GetNonFriendsAsync(email));
+    }
+
 }
 

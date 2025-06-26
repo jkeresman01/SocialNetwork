@@ -112,6 +112,33 @@ public class FriendService(AppDbContext context, IMapper mapper) : IFriendServic
             .FirstOrDefaultAsync(r => r.Id == id)
             ?? throw new ResourceNotFoundException($"Friend request with ID '{id}' not found.");
 
+
+    public async Task<List<UserSummaryDTO>> GetFriendsAsync(string userEmail)
+    {
+        var user = await _context.Users
+            .Include(u => u.Friends)
+            .FirstOrDefaultAsync(u => u.Email == userEmail)
+            ?? throw new ResourceNotFoundException($"User with email '{userEmail}' not found.");
+
+        return _mapper.Map<List<UserSummaryDTO>>(user.Friends);
+    }
+
+    public async Task<List<UserSummaryDTO>> GetNonFriendsAsync(string userEmail)
+    {
+        var user = await _context.Users
+            .Include(u => u.Friends)
+            .FirstOrDefaultAsync(u => u.Email == userEmail)
+            ?? throw new ResourceNotFoundException($"User with email '{userEmail}' not found.");
+
+        var friendIds = user.Friends.Select(f => f.Id).ToList();
+
+        var nonFriends = await _context.Users
+            .Where(u => u.Id != user.Id && !friendIds.Contains(u.Id))
+            .ToListAsync();
+
+        return _mapper.Map<List<UserSummaryDTO>>(nonFriends);
+    }
+
     private void ValidateReceiverAuthorization(User receiver, FriendRequest request)
     {
         if (request.Receiver.Id != receiver.Id)
