@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SocialNetwork.Application.DTOs
 {
-    public class UserSummaryDTO
-    {
-        public long Id { get; set; }
-        public string Email { get; set; } = default!;
-        public string FullName { get; set; } = default!;
-    }
-
+    public record UserSummaryDTO(
+            long Id,
+            String FirstName,
+            String LastName,
+            String Email
+    );
 }

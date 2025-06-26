@@ -15,9 +15,12 @@ namespace SocialNetwork.Application.Mappers
         public UserProfile()
         {
             CreateMap<User, UserDTO>();
+
             CreateMap<User, UserSummaryDTO>()
-                .ForMember(dest => dest.FullName, opt =>
-                    opt.MapFrom(src => $"{src.FirstName} {src.LastName}"));
+                .ForCtorParam("Id", opt => opt.MapFrom(src => src.Id))
+                .ForCtorParam("FirstName", opt => opt.MapFrom(src => src.FirstName))
+                .ForCtorParam("LastName", opt => opt.MapFrom(src => src.LastName))
+                .ForCtorParam("Email", opt => opt.MapFrom(src => src.Email));
 
             CreateMap<UserUpdateRequest, User>()
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
