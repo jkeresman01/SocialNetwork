@@ -1,5 +1,5 @@
-## I don't know why I'm doing this ##
+## Simple full stack Web App (React + ASP.NET) ##
 
 Must watch:
 
-[![Watch the video](https://img.youtube.com/vi/urcL86UpqZc/0.jpg)](https://www.youtube.com/watch?v=urcL86UpqZc)
+[![Watch the video](https://img.youtube.com/vi/RnqAXuLZlaE/0.jpg)](https://www.youtube.com/watch?v=RnqAXuLZlaE)
